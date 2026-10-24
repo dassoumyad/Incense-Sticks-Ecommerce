@@ -1,0 +1,8 @@
+import { useEffect,useState } from 'react'
+import AdminSidebar from '../../components/AdminSidebar.jsx'
+import { getProducts } from '../../services/productService.js'
+import { deleteProduct } from '../../services/adminService.js'
+import { imageUrl } from '../../services/api.js'
+import formatPrice from '../../utils/formatPrice.js'
+import Link from '../../components/Link.jsx'
+export default function Products(){const[data,setData]=useState([]);const[error,setError]=useState('');const load=()=>getProducts().then(setData).catch(e=>setError(e.message));useEffect(()=>{load()},[]);const remove=async(id)=>{if(!window.confirm('Delete this product from your store?'))return;try{await deleteProduct(id);load()}catch(e){setError(e.message)}};return <div className="admin-layout"><AdminSidebar/><main className="admin-main"><div className="admin-head"><div><p className="eyebrow">STORE CATALOGUE</p><h1>Products</h1></div><Link to="/admin/products/new" className="button button-dark">Add product +</Link></div>{error&&<p className="form-error">{error}</p>}<div className="admin-table-wrap"><table className="admin-table"><thead><tr><th>PRODUCT</th><th>CATEGORY</th><th>PRICE</th><th>STOCK</th><th></th></tr></thead><tbody>{data.map(p=><tr key={p._id}><td><div className="admin-product"><img src={imageUrl(p.images?.[0])} alt=""/><span><b>{p.title}</b><small>{p.fragranceType}</small></span></div></td><td>{p.category}</td><td>{formatPrice(p.actualPrice)}</td><td>{p.stock}</td><td><button className="remove-link" onClick={()=>remove(p._id)}>Delete</button></td></tr>)}{!data.length&&<tr><td colSpan="5" className="admin-empty">No products yet. Add your first scent to begin.</td></tr>}</tbody></table></div></main></div>}

@@ -1,0 +1,23 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies and generated output
+node_modules/
+coverage/
+dist/
+build/
+
+# Runtime files and logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+
+# Local/editor and OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
