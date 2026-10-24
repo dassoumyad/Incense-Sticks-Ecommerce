@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: incense-sticks-ecommerce
+    runtime: node
+    plan: free
+    buildCommand: npm ci --prefix Backend && npm ci --prefix Frontend && npm run build --prefix Frontend
+    startCommand: npm start --prefix Backend
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_BOOTSTRAP_SECRET
+        sync: false
+      - key: MONGO_URI
+        sync: false
+      - key: RAZORPAY_ID
+        sync: false
+      - key: RAZORPAY_SECRET
+        sync: false
+      - key: VITE_RAZORPAY_KEY_ID
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: CONTACT_EMAIL
+        value: sd83580@gmail.com

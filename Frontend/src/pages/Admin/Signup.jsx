@@ -5,7 +5,7 @@ import { createAdmin } from '../../services/adminService.js'
 const initialForm = {
   name: '', storeName: '', email: '', mobileNumber: '',
   payoutMethod: 'upi', upiId: '', accountHolderName: '', accountNumber: '', ifscCode: '',
-  password: '', confirm_password: '',
+  adminSignupSecret: '', password: '', confirm_password: '',
 }
 
 export default function AdminSignup() {
@@ -40,7 +40,7 @@ export default function AdminSignup() {
   return <main className="auth-page admin-signup-page"><section className="auth-card admin-signup-card">
     <p className="eyebrow">SEREIN STUDIO · GET STARTED</p>
     <h1>Open your <em>studio.</em></h1>
-    <p className="auth-subtitle">An existing admin must be signed in to authorize this registration. Approved admins share this store, including its products and order history.</p>
+    <p className="auth-subtitle">Use the deployment setup code to create the first admin. After that, an existing admin must be signed in to authorize additional admin registrations. Approved admins share this store, including its products and order history.</p>
     <form className="form-stack" onSubmit={submit}>
       <h2 className="admin-signup-section">Admin details</h2>
       <div className="form-two">
@@ -64,6 +64,7 @@ export default function AdminSignup() {
       <p className="admin-payment-note">Your UPI ID is saved as payout information only. Razorpay test-mode payments are simulated and do not transfer money to UPI. All approved admins can view the same store orders and customer details.</p>
 
       <h2 className="admin-signup-section">Secure your account</h2>
+      <label>First admin setup code<input name="adminSignupSecret" type="password" autoComplete="off" value={form.adminSignupSecret} onChange={update} /><small>Only needed when creating the first admin. Find this code in your deployment environment settings.</small></label>
       <div className="form-two">
         <label>Password<input name="password" type="password" autoComplete="new-password" minLength="8" required value={form.password} onChange={update} /><small>Use uppercase, lowercase, a number and a symbol.</small></label>
         <label>Confirm password<input name="confirm_password" type="password" autoComplete="new-password" minLength="8" required value={form.confirm_password} onChange={update} /></label>

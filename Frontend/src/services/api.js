@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8500/api'
+const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:8500/api')
 
 export async function request(path, options = {}) {
   const isAdminRequest = path.startsWith('/admin/') || ['/product/create-product', '/product/update-product', '/product/delete-specific-product', '/category/create-category', '/category/update-category', '/category/delete-category', '/unused-coupon-code/create-new-coupon-code', '/unused-coupon-code/delete-exist-coupon-code', '/contact/get-all-contacts', '/contact/delete-contact'].includes(path)
