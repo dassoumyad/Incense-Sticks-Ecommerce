@@ -8,6 +8,7 @@ const storefrontProduct = (product) => {
   return {
     ...product,
     title: 'Temple Bloom',
+    category: 'Floral',
     description: 'A soft jasmine floral blend, created to bring a gentle moment of calm to your daily ritual.',
     clientPreview: true,
   }
